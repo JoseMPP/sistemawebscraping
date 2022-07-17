@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container-fluid">
+    <div class=" d-md-inline ">
+        <a class="btn rounded-circle bg-info border-5"  href="/dashboard/ejecuciones"><i class="fas fa-chevron-left"></i></a>
+    </div>
+    <form method="post">
+        {% csrf_token %}
+
+        {{ formset.management_form }}
+        <h3 class="text-dark mb-4">Parametros de la ejecucion Nro: {{ id }}</h3>
+        {% for message in messages %}
+            <div class="alert alert-{% if message.level_tag   == 'error' %}danger{% else %}{{message.level_tag }}{% endif %}"
+            role="alert">
+              {{ message }}
+            </div>
+        {% endfor %}
+        {% for form in formset %}
+
+            <div class="col">
+                 <div class="mb-3">
+                     <label class="form-label" for="username"><strong>{{ form.instance.parametro}}</strong></label> <br>
+                     {{ form }}
+                 </div>
+            </div>
+            <br>
+
+         {% endfor %}
+    <input class="btn btn-primary mb-5" type="submit" value="Save">
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% block content%}
+
+ <div class="container-fluid">
+                    <h3 class="text-dark mb-4">Sitios Web</h3>
+                    <div class="card shadow">
+                        <div class="card-header py-3">
+                            <p class="text-primary m-0 fw-bold">Lista de Sitios Web</p>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6 text-nowrap">
+                                    <div id="dataTable_length-1" class="dataTables_length" aria-controls="dataTable"><label class="form-label" style="margin: 0px;margin-right: 66px;">Show&nbsp;<select class="d-inline-block form-select form-select-sm">
+                                                <option value="10" selected="">10</option>
+                                                <option value="25">25</option>
+                                                <option value="50">50</option>
+                                                <option value="100">100</option>
+                                            </select>&nbsp;</label><a class="btn btn-primary" href="{% url 'scraping_management:crear_sitio_web' %}">Crear Sitio Web</a></div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="text-md-end dataTables_filter" id="dataTable_filter"><label class="form-label"><input type="search" class="form-control form-control-sm" aria-controls="dataTable" placeholder="Search"></label></div>
+                                </div>
+                            </div>
+                            <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
+                                <table class="table my-0" id="dataTable">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 60.2px;">Id</th>
+                                            <th>Nombre</th>
+                                            <th>Dominio</th>
+                                            <th>Descripcion</th>
+                                            <th>Empresa</th>
+                                            <th>Cantidad de ofertas</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for sitio_web in sitios_web %}
+                                        <tr>
+                                            <td>{{ sitio_web.id }}</td>
+                                            <td>{{ sitio_web.nombre }}</td>
+                                            <td>{{ sitio_web.dominio }}</td>
+                                            <td>{{ sitio_web.descripcion }}</td>
+                                            <td>{{ sitio_web.empresa }}</td>
+                                            <td>500 ofertas</td>
+                                            <td>
+                                                <div class="btn-group" role="group">
+                                                    <a class="btn btn-primary" href="/dashboard/ofertas_list/{{sitio_web.id}}"><i class="far fa-calendar-alt"></i></a>
+                                                    <button class="btn btn-primary btn-secondary" type="button"><i class="fas fa-edit"></i></button>
+                                                    <a class="btn btn-primary btn-success" href="/dashboard/ejecutar/"><i class="fas fa-play"></i></a>
+
+                                                    <button class="btn btn-primary btn-danger" type="button"><i class="fas fa-trash-alt"></i></button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+
+
+                                </table>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 align-self-center">
+                                    <p id="dataTable_info" class="dataTables_info" role="status" aria-live="polite">Showing 1 to 10 of 27</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <nav class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
+                                        <ul class="pagination">
+                                            <li class="page-item disabled"><a class="page-link" aria-label="Previous" href="#"><span aria-hidden="true">«</span></a></li>
+                                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                            <li class="page-item"><a class="page-link" aria-label="Next" href="#"><span aria-hidden="true">»</span></a></li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+ </div>
+
+{% endblock %}

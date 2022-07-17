@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container-fluid">
+                    <h3 class="text-dark mb-4">Resultados de la prueba </h3>
+                    <div class="card shadow">
+                        <div class="card-header py-3">
+                            <p class="text-primary m-0 fw-bold">Items extraido con los parametros probados:</p>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6 text-nowrap">
+                                    <div id="dataTable_length-1" class="dataTables_length" aria-controls="dataTable">
+                                        <label class="form-label" style="margin: 0px;margin-right: 66px;">{{ items_count }} items extraidos</label><a class="btn btn-primary" href="{% url 'scraping_management:crear_ejecucion' %}">Guardar como ejecucion</a>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
+                                <table class="table my-0" id="dataTable">
+                                    <thead>
+                                        <tr>
+                                            {% for key in keys %}
+                                            <th>{{key}}</th>
+                                            {% endfor %}
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for item in items%}
+                                        <tr>
+                                            {% for key,value in item.items %}
+                                            <td>{{ value}}</td>
+                                            {% endfor %}
+                                        </tr>
+                                    {% endfor %}
+
+
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+ </div>
+
+{% endblock %}

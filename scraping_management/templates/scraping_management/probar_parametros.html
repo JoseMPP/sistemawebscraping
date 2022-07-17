@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h1 class="text-dark mb-4">Prueba de Parametros en Sitio Web</h1>
+    </div>
+    <div class="card-body">
+        <form  method="post">
+            {% csrf_token %}
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-auto">
+                    {{ spider_form }}
+                    </div>
+                    <div class="col">
+                        <input class="btn btn-primary mb-5" name="spider_selected" type="submit" value="Parametros">
+                    </div>
+                </div>
+
+
+            </div>
+
+        </form>
+    {% if probar_parametros_form is not Null%}
+        Ingrese el valor de los parametros
+        <br>
+        <br>
+        <form  method="post">
+            {% csrf_token %}
+            {{ probar_parametros_form.management_form }}
+            {% for form in probar_parametros_form %}
+            <div class="col">
+                 <div class="mb-3">
+                     <label class="form-label" for="username"><strong>{{ form.instance.parametro}}</strong></label> <br>
+
+                     {{ form }}
+                      <label class="form-label" for="username"><strong>{{ form.instance.parametro.descripcion}}</strong></label> <br>
+                 </div>
+            </div>
+            <br>
+            {% endfor %}
+            <input class="btn btn-primary mb-5" name="parametros_form" type="submit" value="Probar Parametros">
+        </form>
+    {% endif %}
+    </div>
+</div>
+{% endblock %}
